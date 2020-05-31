@@ -1,8 +1,7 @@
-from Task import Task
-from Person import Person
 
 class Project:
     nextProjectId = 1
+    tasks = []
     def __init__(self,_title,_description,_start,_end):
         self.projectId = self.nextProjectId
         Project.nextProjectId += 1

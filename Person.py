@@ -1,4 +1,4 @@
-from Task import Task
+from Task import *
 
 class Person:
     nextPersonId = 1
@@ -14,4 +14,4 @@ class Person:
 
     def createTask(self,_task: Task):
         _task.owner = self
-        Task.tasks.append(_task)
+        Project.tasks.append(_task)
