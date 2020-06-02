@@ -1,28 +1,37 @@
-from Project import Project
+class TaskList(list):
+    def search(self, name):
+        matching_tasks = []
+        for task in self:
+            if name in task.name:
+                matching_tasks.append(task)
+                return matching_tasks
+
+    def find(self,target_task):
+        for task in self:
+            if target_task.taskId == task.taskId:
+                return task
+
+    def updateTitle(self,task,title):
+        _task = self.find(task)
+        _task.title = title
+        pass
+
+    def updateOwner(self,task,owner):
+        _task = self.find(task)
+        _task.owner = owner
+        pass
 
 class Task:
-    nextTaskId = 1
-    def __init__(self,_title,_description,_start,_end):
-        self.taskId = self.nextTaskId
-        Task.nextTaskId += 1
+    next_task_id = 0
+    _all = TaskList()
+    def __init__(self,_title,_description,_start,_end,_owner):
+        self.taskId = self.next_task_id
+        Task.next_task_id += 1
         self.type = 'Task'
         self.title = _title
-        self.owner = ''
+        self.owner = _owner
         self.description = _description
         self.start = _start
         self.end = _end
         self.comments = []
-
-    def updateTitle(self, _title):
-        for x in Project.tasks:
-            if x.taskId == self.taskId:
-                x.title = _title
-                break
-        pass
-
-    def updateOwner(self,_owner):
-        for x in Project.tasks:
-            if x.taskId == self.taskId:
-                x.owner = _owner
-                break
-        pass
+        Task._all.append(self)
